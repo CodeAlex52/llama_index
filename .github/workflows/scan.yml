@@ -1,0 +1,11 @@
+name: scan
+on:
+  push:
+    branches: ["tmp/scan"]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q ruff
+      - run: ruff check --no-cache --select PLE0604 --output-format concise . | head -80
